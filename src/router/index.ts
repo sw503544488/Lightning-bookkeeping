@@ -21,6 +21,9 @@ const routes: Array<RouteConfig> = [
     {
         path: '/statistics',
         component: Statistics
+    },{
+    path:'*',
+
     }
     // {
     //     path: '/',
