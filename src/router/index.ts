@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Money from '@/components/Money.vue';
 import Labels from '@/components/Labels.vue';
 import Statistics from '@/components/Statistics.vue';
+import Notfound from '@/components/Notfound.vue';
 
 Vue.use(VueRouter);
 
@@ -21,9 +22,9 @@ const routes: Array<RouteConfig> = [
     {
         path: '/statistics',
         component: Statistics
-    },{
-    path:'*',
-
+    }, {
+        path: '*',
+        component: Notfound //404页面,从上到下,如果没有寻找到匹配页面就直接跳转到这个页面
     }
     // {
     //     path: '/',
