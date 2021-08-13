@@ -1,11 +1,8 @@
 <template>
-  <div>
+  <Layout>
+    statistics
 
-    <div>
-      statistics
-    </div>
-    <Nav></Nav>
-  </div>
+  </Layout>
 
 </template>
 
@@ -16,6 +13,3 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-
-</style>
