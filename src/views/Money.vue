@@ -3,7 +3,8 @@
 
     <NumberPad/>
 
-    <Types/>
+    <Types
+    />
     <Notes/>
 
     <Tags/>
@@ -26,6 +27,6 @@ export default {
 <style lang="scss">
 .money-content {
   display: flex;
-  flex-direction: column-reverse;//从下面开始布局,最上面的界面就可以占据最大空间
+  flex-direction: column-reverse; //从下面开始布局,最上面的界面就可以占据最大空间
 }
 </style>

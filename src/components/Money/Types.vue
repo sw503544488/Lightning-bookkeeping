@@ -20,8 +20,11 @@ export default class Types extends Vue {
       throw new Error('type is unknown');
     } else {
       this.type = type;
+
     }
   }
+
+
 }
 
 // export default {
