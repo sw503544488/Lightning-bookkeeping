@@ -10,6 +10,22 @@
       <li>住</li>
       <li>行</li>
       <li>衣</li>
+      <li>食</li>
+      <li>住</li>
+      <li>行</li>
+      <li>衣</li>
+      <li>食</li>
+      <li>住</li>
+      <li>行</li>
+      <li>衣</li>
+      <li>食</li>
+      <li>住</li>
+      <li>行</li>
+      <li>衣</li>
+      <li>食</li>
+      <li>住</li>
+      <li>行</li>
+      <li>衣</li>
 
     </ul>
   </div>
@@ -28,10 +44,12 @@ export default {
   padding: 16px;
   flex-grow: 1;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  
   //overflow: auto;
   flex-direction: column-reverse;
   //flex-wrap: wrap-reverse;
+
 
   > .current {
     display: flex;
@@ -48,6 +66,7 @@ export default {
       margin-top: 4px;
     }
   }
+
 
   > .new {
     padding-top: 16px;
