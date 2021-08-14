@@ -35,6 +35,9 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
+  "files": [
+    "svg.d.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

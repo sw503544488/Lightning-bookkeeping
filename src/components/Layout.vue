@@ -25,4 +25,9 @@ export default {
   overflow: auto;
 
 }
+
+svg {
+  width: 32px;
+  height: 32px;
+}
 </style>
