@@ -12,17 +12,22 @@
 @import "~@/assets/style/helper.scss";
 
 body {
-  line-height: 1.5;
-  font-family: $font-hei;
-}
-
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #333333;
+  font-family: $font-hei;
+font-size: 16px;
+  line-height: 1.5;
+
+
 }
+
+
+//#app {
+//  font-family: Avenir, Helvetica, Arial, sans-serif;
+//
+//  //text-align: center;
+//  color: #2c3e50;
+//}
 
 </style>

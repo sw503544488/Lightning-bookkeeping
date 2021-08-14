@@ -9,3 +9,16 @@ a {
   color: inherit;
 }
 
+ul, ol {
+  list-style: none;
+}
+
+button, input {
+  font: inherit;
+}
+
+:focus {
+  outline: none;
+}
+
+//input的外边框去除任何选中

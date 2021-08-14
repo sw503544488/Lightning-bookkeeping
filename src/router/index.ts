@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, {RouteConfig} from 'vue-router';
 // import Home from '../views/Home.vue';
-import Money from '@/components/Money.vue';
+import Money from '@/views/Money.vue';
 import Labels from '@/components/Labels.vue';
 import Statistics from '@/components/Statistics.vue';
 import Notfound from '@/components/Notfound.vue';
