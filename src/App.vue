@@ -8,16 +8,14 @@
 </template>
 
 <style lang="scss">
+@import "~@/assets/style/reset.scss";
+@import "~@/assets/style/helper.scss";
+
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  line-height: 1.5;
+  font-family: $font-hei;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -27,16 +25,4 @@ a {
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
