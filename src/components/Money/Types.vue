@@ -1,25 +1,25 @@
 <template>
   <div>
     <ul class="types">
-      <li :class="type==='-' &&'selected'" @click="selectType('-')">支出</li>
-      <li :class="type==='+'&&'selected'" @click="selectType('+')">收入</li>
+      <li :class="value==='-' &&'selected'" @click="selectType('-')">支出</li>
+      <li :class="value==='+'&&'selected'" @click="selectType('+')">收入</li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 
 @Component  //引用component装饰器,可以直接把type转化成data, 把selectType转化成methods
 export default class Types extends Vue {
-  type = '-';
+  @Prop({default: '-'}) readonly value!: string;
 
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
     } else {
-      this.type = type;
+      this.$emit('update:value', type);
 
     }
   }

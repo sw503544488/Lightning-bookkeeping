@@ -54,7 +54,7 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-    return;
+    this.$emit('update:value', this.output);
   }
 
   remove() {
