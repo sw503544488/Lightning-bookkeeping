@@ -45,7 +45,7 @@ export default {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  
+
   //overflow: auto;
   flex-direction: column-reverse;
   //flex-wrap: wrap-reverse;
