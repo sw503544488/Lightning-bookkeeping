@@ -9,7 +9,6 @@
 let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
 try {
   importAll(require.context('../assets/icon', true, /\.svg$/));
-  console.log('hi');
 } catch (error) {
   console.log(error);
 }

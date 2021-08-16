@@ -20,21 +20,24 @@ import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '../models/recordListModel';
+import tagListModel from '@/models/tagListModel';
 // eslint-disable-next-line no-undef
-const recordList: RecordItem[] = recordListModel.fetch();
-console.log(recordList);
+
+const recordList = recordListModel.fetch();
+const tagList = tagListModel.fetch();
+
 @Component({
   components: {
     Tags, Notes, Types, NumberPad
   }
 })
 export default class Money extends Vue {
-  tags = ['衣', '食', '住', '行', '彩票'];
+  tags = tagList;
   // eslint-disable-next-line no-undef
-  recordList: RecordItem[] = recordListModel.fetch();
+  recordList: RecordItem[] = recordList;
   // eslint-disable-next-line no-undef
   record: RecordItem = {
-    tags: [], notes: '', type: '-', amount: 0,
+    tags: ['衣服'], notes: '', type: '-', amount: 0,
 
   };
 
@@ -64,9 +67,13 @@ export default class Money extends Vue {
     recordListModel.save(this.recordList);
     // window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
   }
+
+  @Watch('$route')
+  routechange(to: any, from: any) {
+    console.log(to, from);
+  }
+
 }
-
-
 </script>
 
 <style lang="scss">
