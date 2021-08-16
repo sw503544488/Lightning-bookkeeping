@@ -25,10 +25,10 @@ const routes: Array<RouteConfig> = [
         component: Statistics
     },
     {
-        path:'/labels/edit',
-        component:EditLabel
+        path: '/labels/edit/:id',
+        component: EditLabel
     }
-    ,{
+    , {
         path: '*',
         component: Notfound //404页面,从上到下,如果没有寻找到匹配页面就直接跳转到这个页面
     }

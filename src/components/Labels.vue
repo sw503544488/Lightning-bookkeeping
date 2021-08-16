@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <ol class="tagList">
+    <ol class="tagList" id="asd">
       <li v-for="tag in tags" :key="tag.id">
         <span>{{ tag.name }}</span>
         <Icon name="right"></Icon>
@@ -26,9 +26,6 @@ import {Component} from 'vue-property-decorator';
 // eslint-disable-next-line no-undef
 import tagListModel from '@/models/tagListModel';
 
-
-
-
 tagListModel.fetch();
 @Component
 export default class Labels extends Vue {
@@ -50,6 +47,10 @@ export default class Labels extends Vue {
     }
   }
 
+  // created() {
+  //   const ul: any = document.querySelectorAll('.asd123c')[0];
+  //   console.log(ul);
+  // }
 
 }
 
