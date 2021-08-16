@@ -19,9 +19,9 @@ import Notes from '@/components/Money/Notes.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
-import model from '../model.ts';
+import recordListModel from '../models/recordListModel';
 // eslint-disable-next-line no-undef
-const recordList: RecordItem[] = model.fetch();
+const recordList: RecordItem[] = recordListModel.fetch();
 console.log(recordList);
 @Component({
   components: {
@@ -31,12 +31,13 @@ console.log(recordList);
 export default class Money extends Vue {
   tags = ['衣', '食', '住', '行', '彩票'];
   // eslint-disable-next-line no-undef
-  recordList: RecordItem[] = model.fetch();
+  recordList: RecordItem[] = recordListModel.fetch();
   // eslint-disable-next-line no-undef
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0,
 
   };
+
 
   // eslint-disable-next-line no-undef
 
@@ -50,7 +51,7 @@ export default class Money extends Vue {
 
   saveRecord() {
     // eslint-disable-next-line no-undef
-    const record2: RecordItem = model.clone(this.record);
+    const record2: RecordItem = recordListModel.clone(this.record);
 
     record2.createdAt = new Date();
     // record2.createdAt.toTimeString();
@@ -60,7 +61,7 @@ export default class Money extends Vue {
   @Watch('recordList')
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   onRecordListChange() {
-    model.save(this.recordList);
+    recordListModel.save(this.recordList);
     // window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
   }
 }
