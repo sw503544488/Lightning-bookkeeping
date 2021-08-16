@@ -23,9 +23,15 @@ import recordListModel from '../models/recordListModel';
 import tagListModel from '@/models/tagListModel';
 // eslint-disable-next-line no-undef
 
+Component.registerHooks([
+  'beforeRouteEnter',
+  'beforeRouteLeave',
+  'beforeRouteUpdate',
+]);
+
+
 const recordList = recordListModel.fetch();
 const tagList = tagListModel.fetch();
-
 @Component({
   components: {
     Tags, Notes, Types, NumberPad
@@ -33,6 +39,7 @@ const tagList = tagListModel.fetch();
 })
 export default class Money extends Vue {
   tags = tagList;
+
   // eslint-disable-next-line no-undef
   recordList: RecordItem[] = recordList;
   // eslint-disable-next-line no-undef
@@ -41,6 +48,17 @@ export default class Money extends Vue {
 
   };
 
+  public beforeRouteEnter(to: any, from: any, next: any) {
+    next((vm: any) => {
+      vm.updateThisTags();
+    });
+
+
+  }
+
+  updateThisTags() {
+    this.tags = tagListModel.fetch();
+  }
 
   // eslint-disable-next-line no-undef
 
@@ -68,10 +86,6 @@ export default class Money extends Vue {
     // window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
   }
 
-  @Watch('$route')
-  routechange(to: any, from: any) {
-    console.log(to, from);
-  }
 
 }
 </script>

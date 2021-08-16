@@ -6,13 +6,14 @@ const tagListModel = {
         return this.data;
     },
     create(name) {
-        if (this.data.indexOf(name) >= 0) {
+        const names = this.data.map(item => item.name);
+        if (names.indexOf(name) >= 0) {
             return 'duplicated';
         }
         if ('0123456789'.indexOf(name) >= 0) {
             return 'number';
         }
-        this.data.push(name);
+        this.data.push({ id: name, name: name });
         this.save();
         return 'success';
     },

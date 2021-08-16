@@ -5,6 +5,7 @@ import Money from '@/views/Money.vue';
 import Labels from '@/components/Labels.vue';
 import Statistics from '@/components/Statistics.vue';
 import Notfound from '@/components/Notfound.vue';
+import EditLabel from '@/views/EditLabel.vue';
 Vue.use(VueRouter);
 const routes = [
     {
@@ -20,7 +21,12 @@ const routes = [
     {
         path: '/statistics',
         component: Statistics
-    }, {
+    },
+    {
+        path: '/labels/edit/:id',
+        component: EditLabel
+    },
+    {
         path: '*',
         component: Notfound //404页面,从上到下,如果没有寻找到匹配页面就直接跳转到这个页面
     }
