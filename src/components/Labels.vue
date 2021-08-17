@@ -1,16 +1,16 @@
 <template>
   <Layout>
-    <ol class="tagList" id="asd">
-      <li v-for="tag in tags" :key="tag.id">
+    <div class="tags">
+      <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
+
         <span>{{ tag.name }}</span>
         <Icon name="right"></Icon>
-      </li>
+      </router-link>
 
-    </ol>
-    <div class="createTag-wraaper">
-      <button class="createTag" @click="createTag">
-        新建标签
-      </button>
+    </div>
+    <div class="button-wraaper">
+
+      <Button @click="createTag" class="button" >新增标签</Button>
     </div>
 
   </Layout>
@@ -25,9 +25,13 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 // eslint-disable-next-line no-undef
 import tagListModel from '@/models/tagListModel';
+import Tags from '@/components/Money/Tags.vue';
+import Button from '@/components/Button.vue';
 
 tagListModel.fetch();
-@Component
+@Component({
+  components: {Button, Tags}
+})
 export default class Labels extends Vue {
   tags = tagListModel.fetch();
 
@@ -58,11 +62,11 @@ export default class Labels extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.tagList {
+.tags {
   background: white;
   font-size: 16px;
 
-  > li {
+  > .tag {
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -78,7 +82,7 @@ export default class Labels extends Vue {
   }
 }
 
-.createTag {
+.button {
   background: #767676;
   color: white;
   border-radius: 4px;
@@ -92,4 +96,5 @@ export default class Labels extends Vue {
     margin-top: 44-16px;
   }
 }
+
 </style>

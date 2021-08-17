@@ -4,7 +4,10 @@
 
     <Types :value.sync="record.type"
     />
-    <Notes @update:value="onUpdateNotes"/>
+    <div class="notesWrapper">
+      <Notes @update:value="onUpdateNotes" :field-name="'备注'" placeholder="请输入备注"/>
+
+    </div>
 
     <Tags :data-source.sync="tags" @update:selected="onUpdateTags"/>
     {{ record }}
@@ -15,7 +18,7 @@
 <script lang="ts">
 import NumberPad from '@/components/Money/NumberPad.vue';
 import Types from '@/components/Money/Types.vue';
-import Notes from '@/components/Money/Notes.vue';
+import Notes from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
@@ -94,5 +97,9 @@ export default class Money extends Vue {
 .money-content {
   display: flex;
   flex-direction: column-reverse; //从下面开始布局,最上面的界面就可以占据最大空间
+}
+
+.notesWrapper {
+  padding: 12px 0;
 }
 </style>
