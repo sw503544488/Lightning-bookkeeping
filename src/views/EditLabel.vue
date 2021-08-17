@@ -9,7 +9,7 @@
 
     </div>
     <div class="formWrapper">
-      <Notes :field-name="'标签名'" :placeholder="'请输入标签名'"/>
+      <Notes :field-name="'标签名'" :placeholder="'请输入标签名'" :value="``"/>
 
     </div>
     <div class="button-wrapper">
@@ -30,6 +30,7 @@ import Button from '@/components/Button.vue';
   components: {Button, Notes}
 })
 export default class EditLabel extends Vue {
+  tag=undefined
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch();

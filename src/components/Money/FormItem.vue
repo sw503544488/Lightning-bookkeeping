@@ -4,8 +4,11 @@
       <span class="name">{{ this.fieldName }}</span>
 
       <input type="text"
-             v-model="value"
-             :placeholder="this.placeholder">
+             :value="value"
+             @input="onValueChange($event.target.value)"
+             :placeholder="this.placeholder"
+             id="formItemInput"
+      >
 
     </label>
   </div>
@@ -18,13 +21,21 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
 @Component
 export default class Notes extends Vue {
 
-  value = '';
+  @Prop({default: ''}) readonly value?: string;
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
+  @Prop() watchRecordList?: any;
 
   @Watch('value')
   onValueChange(newValue: string) {
     this.$emit('update:value', newValue);
+    console.log();
+
+  }
+
+  @Watch('watchRecordList')
+  clearNotes() {
+    document.querySelector('#formItemInput').value = '';
   }
 
 

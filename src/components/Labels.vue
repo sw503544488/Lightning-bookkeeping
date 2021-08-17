@@ -10,7 +10,7 @@
     </div>
     <div class="button-wraaper">
 
-      <Button @click="createTag" class="button" >新增标签</Button>
+      <Button @click="createTag" class="button">新增标签</Button>
     </div>
 
   </Layout>

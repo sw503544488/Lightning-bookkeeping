@@ -5,7 +5,11 @@
     <Types :value.sync="record.type"
     />
     <div class="notesWrapper">
-      <Notes @update:value="onUpdateNotes" :field-name="'备注'" placeholder="请输入备注"/>
+      <Notes @update:value="onUpdateNotes"
+             :field-name="'备注'"
+             placeholder="请输入备注"
+             :watch-record-list="recordList"
+      />
 
     </div>
 
@@ -42,7 +46,6 @@ const tagList = tagListModel.fetch();
 })
 export default class Money extends Vue {
   tags = tagList;
-
   // eslint-disable-next-line no-undef
   recordList: RecordItem[] = recordList;
   // eslint-disable-next-line no-undef
@@ -62,6 +65,7 @@ export default class Money extends Vue {
   updateThisTags() {
     this.tags = tagListModel.fetch();
   }
+
 
   // eslint-disable-next-line no-undef
 
