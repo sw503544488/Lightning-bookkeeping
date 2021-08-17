@@ -26,9 +26,6 @@ const tagListModel: TagListModel = {
     if (names.indexOf(name) >= 0) {
       return 'duplicated';
     }
-    // if ('0123456789'.indexOf(name) >= 0) {
-    //     return 'number';
-    // }
     this.data.push({id, name: name});
     this.save();
     return 'success';
@@ -57,7 +54,6 @@ const tagListModel: TagListModel = {
         break;
       }
     }
-    console.log(index);
     this.data.splice(index, 1);
     this.save();
     return true;

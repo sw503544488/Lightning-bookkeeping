@@ -32,7 +32,6 @@ import {Component} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
 import Notes from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
-import Tags from '@/components/Money/Tags.vue';
 
 @Component({
   components: {Button, Notes}
@@ -41,29 +40,30 @@ export default class EditLabel extends Vue {
   tag?: { id: string, name: string } = undefined;
 
   created() {
-    const id = this.$route.params.id;
-    tagListModel.fetch();
-    const tags = tagListModel.data;
-    const tag = tags.filter(t => t.id === id)[0]; //filter返回一个数组,选取第0个
-    if (tag) {
-      this.tag = tag; //将跳转的tag赋值给this.tag
-    } else {
+    this.tag = window.findTag(this.$route.params.id);
+    if (!this.tag) {
       this.$router.replace('/404');
+//创建之后就找到当前id,根据当前id找到当前tag,并传递给tag
     }
 
   }
 
   updateTag(name: string) {
-    console.log('hi');
     if (this.tag) {
-      tagListModel.update(this.tag.id, name);
-
+      window.updateTag(this.tag.id, name);
     }
   }
 
   remove() {
-    tagListModel.remove(this.tag.id);
-    this.$router.replace('/labels');
+    if (this.tag) {
+      if (window.removeTag(this.tag.id)) {
+        this.$router.replace('/labels');
+
+      } else {
+        window.alert('删除失败');
+      }
+    }
+
   }
 }
 

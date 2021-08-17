@@ -10,16 +10,17 @@ const recordListModel = {
     const record2: RecordItem = clone(record);
     record2.createdAt = new Date();
     this.data.push(record2);
-    console.log(this.data);
-    return this.data;
+    this.save();
   }
   ,
   fetch() {
-    return JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem;
+    this.data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]');
+
+    return this.data;
 
   },
-  save(data: RecordItem[]) {
-    return window.localStorage.setItem(localStorageKeyName, JSON.stringify(data));
+  save() {
+    return window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
   },
 
 

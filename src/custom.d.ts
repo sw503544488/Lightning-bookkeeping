@@ -3,7 +3,7 @@ type RecordItem = {
   notes: string,
   type: string,
   amount: number,
-  createdAt?: Date
+  createdAt?: Date |undefined,
 }
 type  Tag = {
   id: string;
@@ -20,5 +20,11 @@ type TagListModel =
   }
 
 interface Window {
-  tagList: Tag[];
+  tagList: () => Tag[];
+  createTag: (name: string) => void;
+  removeTag: (id: string) => boolean;
+  updateTag: (id: string, name: string) => 'success' | 'notFound' | 'duplicated';//也可以写成这样TagListModel['update']
+  findTag: (id: string) => Tag;
+  recordList: RecordItem[];
+  createRecrod: (record: RecordItem) => void;
 }

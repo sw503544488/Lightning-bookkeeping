@@ -42,35 +42,22 @@ export default class Labels extends Vue {
   createTag() {
     const name = window.prompt('请输入标签名字');
     if (name) {
-      const message = tagListModel.create(name);
-      if (message === 'duplicated') {
-        window.alert('标签名重复');
-      }
-      if (message === 'number') {
-        window.alert('单数字不能作为标签名');
-      } else if (message === 'success') {
-        window.alert('标签添加成功');
-      }
+      window.createTag(name);
+
 
     }
   }
 
-  // created() {
-  //   const ul: any = document.querySelectorAll('.asd123c')[0];
-  //   console.log(ul);
-  // }
+
   public beforeRouteEnter(to: any, from: any, next: any) {
     next((vm: any) => {
       vm.updateThisTags();
     });
-
-
   }
 
   updateThisTags() {
     this.tags = tagListModel.fetch();
   }
-
 }
 
 
