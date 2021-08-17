@@ -8,8 +8,9 @@
       <Notes @update:value="onUpdateNotes"
              :field-name="'备注'"
              placeholder="请输入备注"
-             :watch-record-list="recordList"
       />
+      <!--      :watch-record-list="recordList"-->
+
 
     </div>
 
@@ -26,6 +27,7 @@ import Notes from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
+import store from '@/store/index2';
 // eslint-disable-next-line no-undef
 
 Component.registerHooks([
@@ -35,7 +37,7 @@ Component.registerHooks([
 ]);
 
 
-const recordList = window.recordList;
+// const recordList = store.recordList;
 
 @Component({
   components: {
@@ -43,7 +45,7 @@ const recordList = window.recordList;
   }
 })
 export default class Money extends Vue {
-  tags = window.tagList();
+  tags = store.tagList();
   // eslint-disable-next-line no-undef
   // recordList = window.recordList;
   // eslint-disable-next-line no-undef
@@ -61,7 +63,7 @@ export default class Money extends Vue {
 
   updateThisTags() {
     // tagListModel.fetch()
-    this.tags = window.tagList();
+    this.tags = store.tagList();
   }
 
   onUpdateTags(tags: string[]) {
@@ -73,7 +75,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    window.createRecrod(this.record);
+    store.createRecrod(this.record);
   }
 }
 </script>

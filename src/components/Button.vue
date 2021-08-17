@@ -1,6 +1,6 @@
 <template>
 
-  <button class="button" @click="$emit('click',$event)"
+  <button class="button"
           :style="`${buttonStyle}`"
   >
     <slot/>

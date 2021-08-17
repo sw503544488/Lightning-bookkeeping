@@ -10,7 +10,7 @@
     </div>
     <div class="button-wraaper">
 
-      <Button @click="createTag" class="button">新增标签</Button>
+      <Button @click.native="createTag" class="button">新增标签</Button>
     </div>
 
   </Layout>
@@ -27,6 +27,7 @@ import {Component} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
 import Tags from '@/components/Money/Tags.vue';
 import Button from '@/components/Button.vue';
+import store from '@/store/index2';
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -37,12 +38,12 @@ Component.registerHooks([
   components: {Button, Tags}
 })
 export default class Labels extends Vue {
-  tags = window.tagList;
+  tags = store.tagList;
 
   createTag() {
     const name = window.prompt('请输入标签名字');
     if (name) {
-      window.createTag(name);
+      store.createTag(name);
 
 
     }

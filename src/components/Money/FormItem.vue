@@ -24,7 +24,7 @@ export default class Notes extends Vue {
   @Prop({default: ''}) readonly value?: string;
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
-  @Prop() watchRecordList?: any;
+  // @Prop() watchRecordList?: any;
 
   onValueChange(newValue: string) {
     this.$emit('update:value', newValue);
@@ -32,10 +32,10 @@ export default class Notes extends Vue {
 
   }
 
-  @Watch('watchRecordList')
-  clearNotes() {
-    document.querySelector('#formItemInput').value = '';
-  }
+  // @Watch('watchRecordList')
+  // clearNotes() {
+  //   document.querySelector('#formItemInput').value = '';
+  // }
 
 
 }

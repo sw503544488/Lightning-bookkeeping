@@ -17,6 +17,7 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import Model from '@/models/tagListModel';
+import store from '@/store/index2';
 
 @Component
 export default class Tags extends Vue {
@@ -51,7 +52,7 @@ export default class Tags extends Vue {
   createTag() {
     const name = window.prompt('请输入标签名字');
     if (name) {
-      window.createTag(name);
+      store.createTag(name);
 
     }
   }
