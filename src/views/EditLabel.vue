@@ -9,12 +9,19 @@
 
     </div>
     <div class="formWrapper">
-      <Notes :field-name="'标签名'" :value="tag.name" :placeholder="'请输入标签名'"/>
+      <Notes :field-name="'标签名'"
+             :value="tag.name"
+             :placeholder="'请输入标签名'"
+             @update:value="updateTag"
+      />
 
     </div>
     <div class="button-wrapper">
 
-      <Button class="button" button-style="background:#d75654">删除标签</Button>
+      <Button class="button" button-style="background:#d75654"
+              @click="remove"
+      >删除标签
+      </Button>
     </div>
   </Layout>
 </template>
@@ -44,6 +51,19 @@ export default class EditLabel extends Vue {
       this.$router.replace('/404');
     }
 
+  }
+
+  updateTag(name: string) {
+    console.log('hi');
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name);
+
+    }
+  }
+
+  remove() {
+    tagListModel.remove(this.tag.id);
+    this.$router.replace('/labels');
   }
 }
 
