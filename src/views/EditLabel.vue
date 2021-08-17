@@ -9,7 +9,7 @@
 
     </div>
     <div class="formWrapper">
-      <Notes :field-name="'标签名'" :placeholder="'请输入标签名'" :value="``"/>
+      <Notes :field-name="'标签名'" :value="tag.name" :placeholder="'请输入标签名'"/>
 
     </div>
     <div class="button-wrapper">
@@ -25,19 +25,21 @@ import {Component} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
 import Notes from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
+import Tags from '@/components/Money/Tags.vue';
 
 @Component({
   components: {Button, Notes}
 })
 export default class EditLabel extends Vue {
-  tag=undefined
+  tag?: { id: string, name: string } = undefined;
+
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch();
     const tags = tagListModel.data;
     const tag = tags.filter(t => t.id === id)[0]; //filter返回一个数组,选取第0个
     if (tag) {
-      return;
+      this.tag = tag; //将跳转的tag赋值给this.tag
     } else {
       this.$router.replace('/404');
     }
