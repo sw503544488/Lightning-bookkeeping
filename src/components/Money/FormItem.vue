@@ -6,7 +6,7 @@
       <input type="text"
              :value="value"
              @input="onValueChange($event.target.value)"
-             :placeholder="this.placeholder"
+             :placeholder="placeholder"
              id="formItemInput"
       >
 

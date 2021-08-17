@@ -6,13 +6,15 @@ import store from './store';
 import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
 import icon from '@/components/Icon.vue';
+import tagListModel from '@/models/tagListModel';
 
 Vue.config.productionTip = false;
 Vue.component('Nav', Nav);
 Vue.component('Layout', Layout);
 Vue.component('Icon', icon);
+window.tagList = tagListModel.fetch();
 new Vue({
-    router, //渲染的时候需要将router传给渲染器
-    store,
-    render: h => h(App)
+  router, //渲染的时候需要将router传给渲染器
+  store,
+  render: h => h(App)
 }).$mount('#app');

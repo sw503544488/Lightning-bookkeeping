@@ -28,12 +28,16 @@ import tagListModel from '@/models/tagListModel';
 import Tags from '@/components/Money/Tags.vue';
 import Button from '@/components/Button.vue';
 
-tagListModel.fetch();
+Component.registerHooks([
+  'beforeRouteEnter',
+  'beforeRouteLeave',
+  'beforeRouteUpdate',
+]);
 @Component({
   components: {Button, Tags}
 })
 export default class Labels extends Vue {
-  tags = tagListModel.fetch();
+  tags = window.tagList;
 
   createTag() {
     const name = window.prompt('请输入标签名字');
@@ -55,6 +59,17 @@ export default class Labels extends Vue {
   //   const ul: any = document.querySelectorAll('.asd123c')[0];
   //   console.log(ul);
   // }
+  public beforeRouteEnter(to: any, from: any, next: any) {
+    next((vm: any) => {
+      vm.updateThisTags();
+    });
+
+
+  }
+
+  updateThisTags() {
+    this.tags = tagListModel.fetch();
+  }
 
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="creat">新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
       <li v-for="tag in dataSource" :key="tag.id"
@@ -16,6 +16,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import tagListModel from '@/models/tagListModel';
 
 @Component
 export default class Tags extends Vue {
@@ -32,6 +33,10 @@ export default class Tags extends Vue {
     }
     this.$emit('update:selected', this.selectedTags);
   }
+  created() {
+    const li: any = document.querySelectorAll('li')[0];
+
+  }
 
   creat() {
     const name = window.prompt('请输入标签名字');
@@ -44,6 +49,25 @@ export default class Tags extends Vue {
     }
 
   }
+
+  createTag() {
+    const name = window.prompt('请输入标签名字');
+    if (name) {
+      const message = tagListModel.create(name);
+      if (message === 'duplicated') {
+        window.alert('标签名重复');
+      }
+      if (message === 'number') {
+        window.alert('单数字不能作为标签名');
+      } else if (message === 'success') {
+        window.alert('标签添加成功');
+      }
+
+    }
+  }
+
+
+
 }
 
 

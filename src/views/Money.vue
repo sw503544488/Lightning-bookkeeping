@@ -38,6 +38,7 @@ Component.registerHooks([
 
 
 const recordList = recordListModel.fetch();
+console.log(recordList);
 const tagList = tagListModel.fetch();
 @Component({
   components: {
@@ -45,12 +46,12 @@ const tagList = tagListModel.fetch();
   }
 })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   // eslint-disable-next-line no-undef
   recordList: RecordItem[] = recordList;
   // eslint-disable-next-line no-undef
   record: RecordItem = {
-    tags: ['衣服'], notes: '', type: '-', amount: 0,
+    tags: [''], notes: '', type: '-', amount: 0,
 
   };
 
@@ -84,6 +85,8 @@ export default class Money extends Vue {
     record2.createdAt = new Date();
     // record2.createdAt.toTimeString();
     this.recordList.push(record2);
+    // console.log(this.recordList);
+    // recordListModel.create(this.record);
   }
 
   @Watch('recordList')
