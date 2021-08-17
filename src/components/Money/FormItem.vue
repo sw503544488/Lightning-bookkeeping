@@ -26,7 +26,6 @@ export default class Notes extends Vue {
   @Prop() placeholder?: string;
   @Prop() watchRecordList?: any;
 
-  @Watch('value')
   onValueChange(newValue: string) {
     this.$emit('update:value', newValue);
     console.log();
