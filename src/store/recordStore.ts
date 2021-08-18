@@ -1,14 +1,4 @@
-// import recordListModel from '@/models/recordListModel';
-// //record store
-//
-// export default {
-//   recordList: recordListModel.fetch(),
-//
-//   createRecrod: (record: RecordItem) => {
-//     return recordListModel.create(record);
-//   },
-//
-// };
+
 
 import clone from '@/lib/clone';
 

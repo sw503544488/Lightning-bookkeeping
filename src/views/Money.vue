@@ -1,6 +1,6 @@
 <template>
   <Layout classPrefix="money">
-    <NumberPad @submit="saveRecordAll" :value.sync="record.amount"/>
+    <NumberPad @submit="saveRecord" :value.sync="record.amount"/>
     <Types :value.sync="record.type"/>
     <div class="notesWrapper">
       <Notes @update:value="onUpdateNotes"
@@ -9,7 +9,6 @@
       />
     </div>
     <Tags :data-source.sync="tags" @update:selected="onUpdateTags"/>
-
   </Layout>
 </template>
 
@@ -35,8 +34,8 @@ Component.registerHooks([
     Tags, Notes, Types, NumberPad
   },
   computed: {
-    count() {
-      return store.state.count;
+    recordList() {
+      return store.state.recordList;
     }
   }
 })
@@ -56,8 +55,12 @@ export default class Money extends Vue {
     this.record.notes = notes;
   }
 
-  saveRecordAll() {
-    oldStore.createRecord(this.record);
+  created() {
+    this.$store.commit('fetchRecords');
+  }
+
+  saveRecord() {
+    this.$store.commit('createRecord', this.record);
   }
 
 
