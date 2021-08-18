@@ -26,6 +26,7 @@ import {Component} from 'vue-property-decorator';
 // eslint-disable-next-line no-undef
 import Tags from '@/components/Money/Tags.vue';
 import Button from '@/components/Button.vue';
+import store2 from '@/store/index2';
 import store from '@/store/index2';
 
 
@@ -35,30 +36,35 @@ Component.registerHooks([
   'beforeRouteUpdate',
 ]);
 @Component({
-  components: {Button, Tags}
-})
-export default class Labels extends Vue {
-  tags = store.fetchTags();
-
-  createTag() {
-    const name = window.prompt('请输入标签名字');
-    if (name) {
-      store.createTag(name);
-      this.tags = store.fetchTags();
-
+  components: {Button, Tags},
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
     }
   }
+})
+export default class Labels extends Vue {
+  // tags = store2.fetchTags();
 
+  createTag() {
 
-  public beforeRouteEnter(to: any, from: any, next: any) {
-    next((vm: any) => {
-      vm.updateThisTags();
-    });
+    this.$store.commit('createTag');
+    this.$store.commit('fetchTags')
   }
 
-  updateThisTags() {
-    this.tags = store.fetchTags();
+  created() {
+    this.$store.commit('fetchTags');
   }
+  //
+  // public beforeRouteEnter(to: any, from: any, next: any) {
+  //   next((vm: any) => {
+  //     vm.updateThisTags();
+  //   });
+  // }
+  //
+  // updateThisTags() {
+  //   this.tags = store2.fetchTags();
+  // }
 }
 
 

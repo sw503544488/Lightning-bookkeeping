@@ -4,12 +4,14 @@
       <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in tagList" :key="tag.id"
+      <li v-for="tag in tagList1" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)"
       >{{ tag.name }}
+
       </li>
     </ul>
+
   </div>
 </template>
 
@@ -19,11 +21,18 @@ import {Component, Prop} from 'vue-property-decorator';
 
 import store from '@/store/index2';
 
-@Component
+@Component({
+      computed: {
+        tagList() {
+          return this.$store.state.tagList;
+        }
+      }
+    }
+)
 export default class Tags extends Vue {
   @Prop(Array) readonly dataSource?: string[] | undefined;
   selectedTags: string[] = [];
-  tagList = store.fetchTags();
+  tagList1 = store.fetchTags();
 
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
@@ -36,6 +45,10 @@ export default class Tags extends Vue {
     this.$emit('update:selected', this.selectedTags);
   }
 
+  created() {
+    this.$store.commit('fetchTags');
+    this.tagList1 = this.$store.state.tagList;
+  }
 
   // creat() {
   //   const name = window.prompt('请输入标签名字');
@@ -50,13 +63,9 @@ export default class Tags extends Vue {
   // }
 
   createTag() {
-    const name = window.prompt('请输入标签名字');
-    if (name) {
-      store.createTag(name);
-      this.tagList = store.fetchTags();
+    this.$store.commit('createTag');
+    store.fetchTags();
 
-
-    }
   }
 
 
