@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Notes extends Vue {
@@ -28,10 +28,8 @@ export default class Notes extends Vue {
 
   onValueChange(newValue: string) {
     this.$emit('update:value', newValue);
-    console.log();
 
   }
-
 
 
 }

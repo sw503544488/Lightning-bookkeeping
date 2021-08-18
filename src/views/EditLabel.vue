@@ -11,6 +11,7 @@
     <div class="formWrapper">
       <Notes :field-name="'标签名'"
              :value="tag.name"
+
              :placeholder="'请输入标签名'"
              @update:value="updateTag"
       />
@@ -31,32 +32,45 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Notes from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
-import store from '@/store/index2';
 
 @Component({
-  components: {Button, Notes}
+  components: {Button, Notes},
+  computed: {}
 })
 export default class EditLabel extends Vue {
-  tag?: { id: string, name: string } = undefined;
+
+  get tag() {
+    return this.$store.state.currentTag;
+  }
+
+  set tag(val) {
+    return;
+  }
 
   created() {
-    this.tag = store.findTag(this.$route.params.id);
+    const id = this.$route.params.id;
+    this.$store.commit('fetchTags');
+    this.$store.commit('setCurrentTag', id);
+
+
     if (!this.tag) {
       this.$router.replace('/404');
-//创建之后就找到当前id,根据当前id找到当前tag,并传递给tag
     }
 
   }
 
   updateTag(name: string) {
     if (this.tag) {
-      store.updateTag(this.tag.id, name);
+      // store.updateTag(this.tag.id, name);
+      this.$store.commit('updateTag', {id: this.tag.id, name: name});
     }
+
   }
 
   remove() {
     if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
+      if (this.tag) {
+        this.$store.commit('removeTag', this.tag.id);
         this.$router.replace('/labels');
 
       } else {

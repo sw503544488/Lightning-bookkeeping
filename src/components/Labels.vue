@@ -26,8 +26,7 @@ import {Component} from 'vue-property-decorator';
 // eslint-disable-next-line no-undef
 import Tags from '@/components/Money/Tags.vue';
 import Button from '@/components/Button.vue';
-import store2 from '@/store/index2';
-import store from '@/store/index2';
+
 
 
 Component.registerHooks([
@@ -55,16 +54,7 @@ export default class Labels extends Vue {
   created() {
     this.$store.commit('fetchTags');
   }
-  //
-  // public beforeRouteEnter(to: any, from: any, next: any) {
-  //   next((vm: any) => {
-  //     vm.updateThisTags();
-  //   });
-  // }
-  //
-  // updateThisTags() {
-  //   this.tags = store2.fetchTags();
-  // }
+
 }
 
 

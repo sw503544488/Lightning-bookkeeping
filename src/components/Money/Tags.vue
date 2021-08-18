@@ -50,22 +50,9 @@ export default class Tags extends Vue {
     this.tagList1 = this.$store.state.tagList;
   }
 
-  // creat() {
-  //   const name = window.prompt('请输入标签名字');
-  //   if (name === '') {
-  //     window.alert('标签名不能为空');
-  //   } else {
-  //     if (this.dataSource) {
-  //       this.$emit('update:dataSource', [...this.dataSource, {id: name, name: name}]);
-  //     }
-  //   }
-  //
-  // }
-
   createTag() {
     this.$store.commit('createTag');
     store.fetchTags();
-
   }
 
 
