@@ -24,10 +24,10 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 // eslint-disable-next-line no-undef
-import tagListModel from '@/models/tagListModel';
 import Tags from '@/components/Money/Tags.vue';
 import Button from '@/components/Button.vue';
 import store from '@/store/index2';
+
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -38,13 +38,13 @@ Component.registerHooks([
   components: {Button, Tags}
 })
 export default class Labels extends Vue {
-  tags = store.tagList;
+  tags = store.fetchTags();
 
   createTag() {
     const name = window.prompt('请输入标签名字');
     if (name) {
       store.createTag(name);
-
+      this.tags = store.fetchTags();
 
     }
   }
@@ -57,7 +57,7 @@ export default class Labels extends Vue {
   }
 
   updateThisTags() {
-    this.tags = tagListModel.fetch();
+    this.tags = store.fetchTags();
   }
 }
 

@@ -1,21 +1,14 @@
 <template>
   <Layout classPrefix="money">
-    <NumberPad @submit="saveRecord" :value.sync="record.amount"/>
-
-    <Types :value.sync="record.type"
-    />
+    <NumberPad @submit="saveRecordAll" :value.sync="record.amount"/>
+    <Types :value.sync="record.type"/>
     <div class="notesWrapper">
       <Notes @update:value="onUpdateNotes"
              :field-name="'备注'"
              placeholder="请输入备注"
       />
-      <!--      :watch-record-list="recordList"-->
-
-
     </div>
-
     <Tags :data-source.sync="tags" @update:selected="onUpdateTags"/>
-    {{ record }}
 
   </Layout>
 </template>
@@ -27,8 +20,8 @@ import Notes from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import store from '@/store/index2';
-// eslint-disable-next-line no-undef
+import oldStore from '@/store/index2';
+import store from '@/store/index.ts';
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -37,34 +30,23 @@ Component.registerHooks([
 ]);
 
 
-// const recordList = store.recordList;
-
 @Component({
   components: {
     Tags, Notes, Types, NumberPad
+  },
+  computed: {
+    count() {
+      return store.state.count;
+    }
   }
 })
 export default class Money extends Vue {
-  tags = store.tagList();
-  // eslint-disable-next-line no-undef
-  // recordList = window.recordList;
+  tags = oldStore.fetchTags();
   // eslint-disable-next-line no-undef
   record: RecordItem = {
     tags: [''], notes: '', type: '-', amount: 0
-
   };
 
-
-  public beforeRouteEnter(to: any, from: any, next: any) {
-    next((vm: any) => {
-      vm.updateThisTags();
-    });
-  }
-
-  updateThisTags() {
-    // tagListModel.fetch()
-    this.tags = store.tagList();
-  }
 
   onUpdateTags(tags: string[]) {
     this.record.tags = tags;
@@ -74,9 +56,11 @@ export default class Money extends Vue {
     this.record.notes = notes;
   }
 
-  saveRecord() {
-    store.createRecrod(this.record);
+  saveRecordAll() {
+    oldStore.createRecord(this.record);
   }
+
+
 }
 </script>
 
