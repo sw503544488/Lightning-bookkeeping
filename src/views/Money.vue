@@ -1,7 +1,8 @@
 <template>
   <Layout classPrefix="money">
     <NumberPad @submit="saveRecord" :value.sync="record.amount"/>
-    <Types :value.sync="record.type"/>
+    <Tabs :data-source="recordTypeList"
+          :value.sync="record.type"/>
     <div class="notesWrapper">
       <Notes @update:value="onUpdateNotes"
              :field-name="'备注'"
@@ -14,13 +15,14 @@
 
 <script lang="ts">
 import NumberPad from '@/components/Money/NumberPad.vue';
-import Types from '@/components/Money/Types.vue';
 import Notes from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import oldStore from '@/store/index2';
 import store from '@/store/index.ts';
+import Tabs from '@/components/Tabs.vue';
+import recordTypeList from '@/constants/recordTypeList';
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -31,7 +33,8 @@ Component.registerHooks([
 
 @Component({
   components: {
-    Tags, Notes, Types, NumberPad
+    Tabs,
+    Tags, Notes, NumberPad
   },
   computed: {
     recordList() {
@@ -45,7 +48,7 @@ export default class Money extends Vue {
   record: RecordItem = {
     tags: [''], notes: '', type: '-', amount: 0
   };
-
+  recordTypeList = recordTypeList;
 
   onUpdateTags(tags: string[]) {
     this.record.tags = tags;
