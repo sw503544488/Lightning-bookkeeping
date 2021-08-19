@@ -5,13 +5,11 @@
 
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <div>
-      type:{{ type }}
-      <br/>
-      interval:{{ interval }}
+
     </div>
     <ol>
-      <li v-for="(group,index) in result" :key="index">
-        <h3 class="title">{{ group.title }}</h3>
+      <li v-for="group in result" :key="group.title">
+        <h3 class="title">{{ beautify(group.title) }}</h3>
         <hr>
         <ol>
           <li class="record" v-for="item in group.items" :key="item.id">
@@ -32,6 +30,8 @@ import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
+import dayjs from 'dayjs';
+
 
 @Component({
   components: {Tabs}
@@ -61,7 +61,37 @@ export default class Statistics extends Vue {
       hashTable[date].items.push(recordList[i]);
     }
     return hashTable;
+  }
 
+  beautify(string: string) {
+    const now = dayjs();
+    const day = dayjs(string);
+    console.log(now);
+    console.log(now.subtract(2, 'day'));
+    if (day.isSame(now, 'day')) {
+      return '今天';
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
+      console.log('hi');
+      return '昨天';
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
+      return '前天';
+    } else if (day.isSame(now, 'year')) {
+      return day.format('M月D日');
+    } else {
+      return day.format('YYYY年M月D日');
+    }
+
+
+    // const d = new Date(Date.parse(string));
+    // const y = d.getFullYear();
+    // const m = d.getMonth();
+    // const dd = d.getDay();
+    // const now = new Date();
+    // if (now.getFullYear() === y && now.getMonth() === m && now.getDay() === dd) {
+    //   return '今天';
+    // } else {
+    //   return string;
+    // }
   }
 
   type = '-';
