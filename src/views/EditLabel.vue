@@ -48,6 +48,7 @@ export default class EditLabel extends Vue {
   }
 
   created() {
+
     const id = this.$route.params.id;
     this.$store.commit('fetchTags');
     this.$store.commit('setCurrentTag', id);
@@ -68,6 +69,10 @@ export default class EditLabel extends Vue {
   }
 
   remove() {
+    if (this.$store.state.tagList.length === 1) {
+      return window.alert('请保留至少一个标签');
+    }
+
     if (this.currentTag) {
       if (this.currentTag) {
         this.$store.commit('removeTag', this.currentTag.id);
