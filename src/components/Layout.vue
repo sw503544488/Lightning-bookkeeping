@@ -15,10 +15,9 @@ export default {
 
 <style lang='scss' scoped>
 .layout-wrapper {
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
-  height: 99vh;
+  min-height: 99vh;
 }
 
 .content {

@@ -15,4 +15,9 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app');
+window.onload = function () {
+    setTimeout(function () {
+        window.scrollTo(0, 100);
+    }, 0);
+};
 //# sourceMappingURL=main.js.map

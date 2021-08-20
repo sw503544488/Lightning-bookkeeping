@@ -4,6 +4,8 @@
         :class="liClass(item)"
         @click="select(item)"
         class="tabs-item"
+
+
     >
       {{ item.text }}
     </li>
@@ -18,7 +20,7 @@ type  DataSourceItem = { text: string, value: string }
 
 @Component
 export default class Tabs extends Vue {
-  @Prop({required: true, type: Array}) dataSource: DataSourceItem[];
+  @Prop({required: true, type: Array}) dataSource?: DataSourceItem[];
   @Prop() readonly value!: string;
   @Prop(String) classPrefix?: string;
 
@@ -41,6 +43,8 @@ export default class Tabs extends Vue {
   display: flex;
   text-align: center;
   font-size: 24px;
+  position: relative;
+
 
   &-item {
     width: 50%;
@@ -60,5 +64,11 @@ export default class Tabs extends Vue {
       background: #333;
     }
   }
+
+  .tabs-item {
+    position: sticky;
+    top: 0;
+  }
+
 }
 </style>

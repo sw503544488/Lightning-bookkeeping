@@ -14,9 +14,14 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', icon);
 
 
-
 new Vue({
   router, //渲染的时候需要将router传给渲染器
   store,
   render: h => h(App)
 }).$mount('#app');
+window.onload = function () {
+  setTimeout(
+    function () {
+      window.scrollTo(0, 100);
+    }, 0);
+};
