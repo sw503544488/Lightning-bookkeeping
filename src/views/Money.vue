@@ -48,11 +48,12 @@ export default class Money extends Vue {
   tags = oldStore.fetchTags();
   // eslint-disable-next-line no-undef
   record: RecordItem = {
-    tags: [''], notes: '', type: '-', amount: 0
+    tags: [{id: '', name: ''}], notes: '', type: '-', amount: 0
   };
   recordTypeList = recordTypeList;
 
-  onUpdateTags(tags: string[]) {
+  // eslint-disable-next-line no-undef
+  onUpdateTags(tags: Tag[]) {
     this.record.tags = tags;
   }
 

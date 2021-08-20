@@ -54,10 +54,12 @@ export default class Statistics extends Vue {
   get groupedList() {
     const {recordList} = this;
     if (recordList.length === 0) {return [];}
-    const filterList = clone(recordList).filter(r => r.type === this.type);
-    if (filterList.length === 0) {return []; }
-    const newList = filterList.sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
 
+    // eslint-disable-next-line no-undef
+    const filterList = clone(recordList).filter((r: RecordItem) => r.type === this.type);
+    if (filterList.length === 0) {return []; }
+    // eslint-disable-next-line no-undef
+    const newList = filterList.sort((a: RecordItem, b: RecordItem) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
     // eslint-disable-next-line no-undef
     type Result = { title: string, total?: number, items: RecordItem[] }[]
     const result: Result = [
@@ -109,7 +111,6 @@ export default class Statistics extends Vue {
   }
 }
 </script>
-
 <style scoped lang="scss">
 .noResult {
   padding: 16px;
