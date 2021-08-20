@@ -28,7 +28,6 @@ import Tags from '@/components/Money/Tags.vue';
 import Button from '@/components/Button.vue';
 
 
-
 Component.registerHooks([
   'beforeRouteEnter',
   'beforeRouteLeave',
@@ -46,9 +45,11 @@ export default class Labels extends Vue {
   // tags = store2.fetchTags();
 
   createTag() {
+    const name = window.prompt('请输入标签名字');
+    this.$store.commit('createTag', name);
+    this.$store.commit('fetchTags');
+    window.alert('添加成功');
 
-    this.$store.commit('createTag');
-    this.$store.commit('fetchTags')
   }
 
   created() {

@@ -6,6 +6,7 @@
       <Notes @update:value="onUpdateNotes"
              :field-name="'备注'"
              placeholder="请输入备注"
+             :value="record.notes"
       />
     </div>
     <Tags :data-source.sync="tags" @update:selected="onUpdateTags"/>
@@ -64,7 +65,14 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
+    console.log(this.record.tags);
+    console.log(this.record.tags.length);
+    if (this.record.tags[0].name === undefined) {
+
+      return window.alert('请添加标签');
+    }
     this.$store.commit('createRecord', this.record);
+    this.record.notes = '';
   }
 
 

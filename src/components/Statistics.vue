@@ -7,20 +7,21 @@
     <div>
 
     </div>
-    <ol>
+    <ol v-if="groupedList.length>0">
       <li class="li" v-for="group in groupedList" :key="group.title">
         <h3 class="title">{{ beautify(group.title) }}<span>￥{{ group.total }}</span></h3>
         <hr>
 
         <ol>
           <li class="record" v-for="item in group.items" :key="item.id">
-            <span>{{ item.tags[0].name || '' }}</span>
+            <span>{{ item.tags[0].name }}</span>
             <span class="notes" :style="{marginRight:'auto'}">{{ item.notes }}</span>
             <span>￥{{ item.amount }}</span>
           </li>
         </ol>
       </li>
     </ol>
+    <div v-else class="noResult">目前没有相关记录</div>
   </Layout>
 </template>
 
@@ -53,10 +54,15 @@ export default class Statistics extends Vue {
   get groupedList() {
     const {recordList} = this;
     if (recordList.length === 0) {return [];}
-    const newList = clone(recordList).filter(r => r.type === this.type).sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+    const filterList = clone(recordList).filter(r => r.type === this.type);
+    if (filterList.length === 0) {return []; }
+    const newList = filterList.sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+
     // eslint-disable-next-line no-undef
     type Result = { title: string, total?: number, items: RecordItem[] }[]
-    const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), total: 0, items: [newList[0]]}];
+    const result: Result = [
+      {title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), total: 0, items: [newList[0]]}
+    ];
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result [result.length - 1];
@@ -98,7 +104,6 @@ export default class Statistics extends Vue {
   typeList = recordTypeList;
 
   created() {
-    console.log('hi');
     this.$store.commit('fetchRecords');
     // console.log(this.recordList);
   }
@@ -106,6 +111,11 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
+.noResult {
+  padding: 16px;
+  text-align: center;
+}
+
 ::v-deep .type-tabs-item {
   background: darken(#c4c4c4, 15%);
 
