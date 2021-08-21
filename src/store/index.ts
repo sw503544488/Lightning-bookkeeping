@@ -19,7 +19,7 @@ const store = new Vuex.Store({
     createRecord(state, record) {
 
       const record2: RecordItem = clone(record);
-      record2.createdAt = new Date().toISOString();
+      record2.createdAt =record2.createdAt|| new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords');
 
@@ -90,7 +90,6 @@ const store = new Vuex.Store({
         names.splice(idList.indexOf(id), 1);
 
         if (names.indexOf(name) >= 0) {
-          console.log('hi');
           return 'duplicated';
         } else {
           const tag = state.tagList.filter(item => item.id === id)[0];

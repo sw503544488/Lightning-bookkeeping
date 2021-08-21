@@ -1,13 +1,20 @@
 <template>
   <Layout classPrefix="money">
     <NumberPad @submit="saveRecord" :value.sync="record.amount"/>
-
-    <div class="notesWrapper">
+    <div class="createdAt ">
+      <Notes field-name="日期"
+             placeholder="在这里输入日期"
+             :value.sync="record.createdAt"
+             type="date"
+      />
+    </div>
+    <div class="notesWrapper ">
       <Notes @update:value="onUpdateNotes"
              :field-name="'备注'"
              placeholder="请输入备注"
-             :value="record.notes"
+             :value.sync="record.notes"
       />
+
     </div>
     <Tags :data-source.sync="tags" @update:selected="onUpdateTags"/>
     <Tabs :data-source="recordTypeList"
@@ -48,7 +55,7 @@ export default class Money extends Vue {
   tags = oldStore.fetchTags();
   // eslint-disable-next-line no-undef
   record: RecordItem = {
-    tags: [{id: '', name: ''}], notes: '', type: '-', amount: 0
+    tags: [{id: '', name: ''}], notes: '', type: '-', amount: 0, createdAt: new Date().toISOString()
   };
   recordTypeList = recordTypeList;
 
@@ -66,9 +73,8 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    console.log(this.record.tags);
-    console.log(this.record.tags.length);
-    if (this.record.tags[0].name === undefined) {
+    console.log(this.record.tags[0].name);
+    if (this.record.tags[0].name === 'undefined') {
 
       return window.alert('请添加标签');
     }

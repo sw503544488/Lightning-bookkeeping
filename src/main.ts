@@ -26,7 +26,7 @@ window.onload = function () {
     }, 0);
 };
 if (document.documentElement.clientWidth > 500) {
-  window.alert('最好使用手机打开本页面以保证浏览效果');
+  // window.alert('最好使用手机打开本页面以保证浏览效果');
   //   const img = document.createElement('img');
   //   img.src = 'QRcode.png';
   //   img.style.position = 'fixed';
