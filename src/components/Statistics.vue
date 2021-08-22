@@ -2,8 +2,7 @@
 
   <Layout>
     <Tabs class-prefix="type" :data-source="typeList" :value.sync="type"/>
-
-    <!--    <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>-->
+    <ECharts class="xxx" :options="x"/>
     <div>
 
     </div>
@@ -34,15 +33,65 @@ import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+import 'echarts/lib/chart/line';
+import 'echarts/lib/component/polar';
+
+// import ECharts from 'vue-echarts';
+
+// Vue.component('v-chart', VueECharts);
+
+const ECharts: any = require('vue-echarts').default;
+console.log('EChart');
+console.log(ECharts);
 
 @Component({
-  components: {Tabs}
+  components: {Tabs, ECharts}
 })
 export default class Statistics extends Vue {
 
-  // eslint-disable-next-line no-undef
-  tagString(tags: Tag[]) {
-    return tags.length === 0 ? '无' : tags.join(',');
+
+  get x() {
+    let data = [];
+
+    for (let i = 0; i <= 360; i++) {
+      let t = i / 180 * Math.PI;
+      let r = Math.sin(2 * t) * Math.cos(2 * t);
+      data.push([r, i]);
+    }
+    return {
+      title: {
+        text: '极坐标双数值轴'
+      },
+      legend: {
+        data: ['line']
+      },
+      polar: {
+        center: ['50%', '54%']
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      angleAxis: {
+        type: 'value',
+        startAngle: 0
+      },
+      radiusAxis: {
+        min: 0
+      },
+      series: [
+        {
+          coordinateSystem: 'polar',
+          name: 'line',
+          type: 'line',
+          showSymbol: false,
+          data: data
+        }
+      ],
+      animationDuration: 2000
+    };
   }
 
 
@@ -173,6 +222,16 @@ export default class Statistics extends Vue {
   margin-right: auto;
   margin-left: 16px;
   color: #999999;
+}
+
+.echarts {
+  width: 100%;
+  height: 100%;
+}
+
+::v-deep .xxx {
+  width: 100%;
+  height: 100%;
 }
 </style>
 

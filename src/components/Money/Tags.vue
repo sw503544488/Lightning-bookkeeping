@@ -54,7 +54,6 @@ export default class Tags extends Vue {
     const name = window.prompt('请输入标签名字');
     this.$store.commit('createTag', name);
     store.fetchTags();
-    window.alert('添加成功');
 
   }
 

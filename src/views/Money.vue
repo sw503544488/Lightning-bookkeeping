@@ -73,7 +73,6 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    console.log(this.record.tags[0].name);
     if (this.record.tags[0].name === 'undefined') {
 
       return window.alert('请添加标签');
